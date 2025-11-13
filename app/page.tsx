@@ -1,6 +1,7 @@
 
 import IndexPage from '@/components/IndexPage'
 import PreviewIndexPage from '@/components/PreviewIndexPage'
+import PreviewProvider from '@/components/PreviewProvider'
 import { readToken } from '@/sanity/env'
 import { getAllPosts, getClient, getSettings } from '@/sanity/lib/client'
 import { Post, Settings } from '@/sanity/lib/sanity.queries'
@@ -20,6 +21,14 @@ export default async function Page({
     getSettings(client),
     getAllPosts(client),
   ])
+
+  if (isDraftMode) {
+    return (
+      <PreviewProvider token={readToken} perspective="drafts">
+        <PreviewIndexPage posts={posts} settings={settings} />
+      </PreviewProvider>
+    )
+  }
 
   return (
     <main>

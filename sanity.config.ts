@@ -43,6 +43,7 @@ export default defineConfig({
       // resolve: ,
       previewUrl: { previewMode: { enable: PREVIEW_MODE_ROUTE } },
       resolve: {locations: locate},
+      
     }),
     settingsPlugin({ type: settingsType.name }),
     unsplashImageAsset(),
