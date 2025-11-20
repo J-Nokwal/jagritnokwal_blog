@@ -66,32 +66,32 @@ export const settingsStructure = (
 ): StructureResolver => {
   return (S) => {
     // The `Settings` root list item
-    // const settingsListItem = // A singleton not using `documentListItem`, eg no built-in preview
-    //   S.listItem()
-    //     .title(typeDef.title || 'Settings')
-    //     .icon(typeDef.icon)
-    //     .child(
-    //       S.editor()
-    //         .id(typeDef.name)
-    //         .schemaType(typeDef.name)
-    //         .documentId(typeDef.name),
-    //     )
-    const settingsListItem: ListItemBuilder = // A singleton not using `documentListItem`, eg no built-in preview
+    const settingsListItem = // A singleton not using `documentListItem`, eg no built-in preview
       S.listItem()
         .title(typeDef.title || 'Settings')
-        .icon(typeDef.icon).child(
-          // S.documentList()
-          //   .title(typeDef.title || 'Settings')
-          //   .schemaType(typeDef.name)
-          //   .id("settings")
-          //   .filter(`_id == "${typeDef.name}"`)
-          S.menuItem()
-            .title(typeDef.title || 'Settings')
-            .icon(typeDef.icon)
-            .child(
-              S.lis
-            )
+        .icon(typeDef.icon)
+        .child(
+          S.editor()
+            .id(typeDef.name)
+            .schemaType(typeDef.name)
+            .documentId(typeDef.name),
         )
+    // const settingsListItem: ListItemBuilder = // A singleton not using `documentListItem`, eg no built-in preview
+    //   S.listItem()
+    //     .title(typeDef.title || 'Settings')
+    //     .icon(typeDef.icon).child(
+    //       // S.documentList()
+    //       //   .title(typeDef.title || 'Settings')
+    //       //   .schemaType(typeDef.name)
+    //       //   .id("settings")
+    //       //   .filter(`_id == "${typeDef.name}"`)
+    //       S.menuItem()
+    //         .title(typeDef.title || 'Settings')
+    //         .icon(typeDef.icon)
+    //         .child(
+    //           S.lis
+    //         )
+    //     )
 
 
     // The default root list items (except custom ones)
