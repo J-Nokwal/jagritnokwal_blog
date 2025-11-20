@@ -4,6 +4,7 @@ import   createWithVercelToolbar  from  "@vercel/toolbar/plugins/next" ;
 
 const nextConfig: NextConfig = {
   /* config options here */
+  cacheComponents: true,
   logging: {
     fetches: {
       fullUrl: true,

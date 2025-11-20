@@ -1,6 +1,6 @@
 
 import SmoothScrolling from '@/components/SmoothScrolling';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 export default function RootLayout({
     children,
@@ -8,8 +8,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <section>
-            <SmoothScrolling>{children}</SmoothScrolling>
-        </section>
+        <main>
+            <Suspense>
+                <SmoothScrolling>{children}</SmoothScrolling>
+            </Suspense>
+        </main>
     );
 }

@@ -6,8 +6,10 @@ import { readToken } from '@/sanity/env'
 import { getAllPosts, getClient, getSettings } from '@/sanity/lib/client'
 import { Post, Settings } from '@/sanity/lib/sanity.queries'
 import { draftMode } from 'next/headers'
+import IndexPageDataProvider from './posts/components/indexPageDataProvider'
+import { Suspense } from 'react'
 
-export const revalidate = 60 // optional: revalidate every 60s (ISR)
+// export const revalidate = 60 // optional: revalidate every 60s (ISR)
 
 export default async function Page({
   searchParams,
@@ -15,24 +17,27 @@ export default async function Page({
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const isDraftMode = (await draftMode()).isEnabled;
-  const client = getClient(isDraftMode ? { token: readToken, perspective: 'drafts' } : undefined)
-
-  const [settings, posts = []]: [Settings, Post[]] = await Promise.all([
-    getSettings(client),
-    getAllPosts(client),
-  ])
 
   if (isDraftMode) {
+    const client = getClient({ token: readToken, perspective: 'drafts' })
+
+    const [settings, posts = []]: [Settings, Post[]] = await Promise.all([
+      getSettings(client),
+      getAllPosts(client),
+    ])
     return (
       <PreviewProvider token={readToken} perspective="drafts">
         <PreviewIndexPage posts={posts} settings={settings} />
       </PreviewProvider>
     )
   }
-console.log('Server Side!sss') 
+
+
   return (
-    <main>
-      <IndexPage posts={posts} settings={settings} />
-    </main>
+    <Suspense fallback={<div>Loading...</div>}>
+      <IndexPageDataProvider />
+    </Suspense>
   )
 }
+
+
