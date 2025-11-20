@@ -29,7 +29,7 @@ export default async function Page({
       </PreviewProvider>
     )
   }
-
+console.log('Server Side!sss') 
   return (
     <main>
       <IndexPage posts={posts} settings={settings} />

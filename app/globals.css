@@ -11,7 +11,6 @@
 @layer base {
   html {
     font-family: var(--font-sans);
-
   }
   .highlight {
     font-family: var(--font-highlight);
