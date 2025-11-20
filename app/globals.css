@@ -2,5 +2,19 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  
+    --font-geist-sans : var(--font-geist-sans), 'Geist Sans', sans-serif;
+    --font-geist-mono : var(--font-geist-mono), 'Geist Mono', monospace;
+    --font-sans: var(--font-inter), ui-sans-serif, system-ui;
+    --font-highlight: var(--font-breeserif), Impact, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+
+  }
+  .highlight {
+    font-family: var(--font-highlight);
+    letter-spacing: 0.02em;
+  }
 }

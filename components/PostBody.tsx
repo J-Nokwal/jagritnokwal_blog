@@ -16,7 +16,16 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
     image: ({ value }) => {
       return <SanityImage {...value} />
-    }, 
+    },
+  },
+    marks:{
+    highlight : ({ children }) => {
+      return <span style={{backgroundColor: '#0f0'}}>{children}</span>
+    },
+    fontHighlight :({ children }) => {
+      return  <span style={{ fontFamily: "var(--font-breeserif)" }}>{children}</span>
+    },
+
   },
 }
 

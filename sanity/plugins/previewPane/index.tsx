@@ -8,8 +8,8 @@
 import { PREVIEW_MODE_ROUTE } from '../../env'
 import type { DefaultDocumentNodeResolver } from 'sanity/structure'
 import { Iframe, IframeOptions } from 'sanity-plugin-iframe-pane'
-import authorType from '@/sanity/schemas/author'
-import postType from '@/sanity/schemas/post'
+import authorType from '../../../sanity/schemas/author'
+import postType from '../../../sanity/schemas/post'
 
 import AuthorAvatarPreviewPane from './AuthorAvatarPreviewPane'
 

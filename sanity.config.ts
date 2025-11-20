@@ -7,6 +7,7 @@
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
+import { resolve } from "path";
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, dataset, projectId, PREVIEW_MODE_ROUTE} from './sanity/env'
@@ -19,6 +20,9 @@ import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import { settingsPlugin, settingsStructure } from './sanity/plugins/settings'
 import { locate } from './sanity/plugins/locate'
 import { previewDocumentNode } from './sanity/plugins/previewPane'
+import { customDocumentActions } from './sanity/plugins/documentActions'
+import { dashboardTool } from '@sanity/dashboard'
+import { paneComponent } from './sanity/plugins/paneComponent'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -50,5 +54,32 @@ export default defineConfig({
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
+    // dashboardTool({ widgets: [
+    //   documentListWidget({title: 'New', order: '_createdAt desc'}),
+    // documentListWidget({title: 'Last edited books', order: '_updatedAt desc', types: ['post']}),
+  
+    // ]})
+
   ],
+  document:{
+    actions: customDocumentActions
+  },
+  search: {
+    // https://www.sanity.io/docs/search
+    strategy: 'groq2024',
+  },
+  studio:{
+    components: {
+      // layout: (props) => paneComponent(props),
+      // layout: paneComponent,
+    },
+  },
+  
+
+  // tools: (prev) => {
+  //   return [
+  //     // ...prev,
+  //     // Add custom tools here
+  //   ]
+  // }
 })

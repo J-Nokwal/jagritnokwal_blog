@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bebas_Neue, Bree_Serif, Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { SanityLive } from "@/sanity/lib/live";
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/disable-draft-mode";
+import { VercelToolbar } from '@vercel/toolbar/next';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,6 +16,22 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
+const bebas = Bebas_Neue({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-bebas',
+})
+const breeserif = Bree_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-breeserif',
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,7 +48,7 @@ export default async function RootLayout({
 
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${bebas.variable} ${breeserif.variable} antialiased`}
       >
         {children}
         {(await draftMode()).isEnabled && (
@@ -39,6 +56,7 @@ export default async function RootLayout({
           <SanityLive />
           <DisableDraftMode />
           <VisualEditing />
+           {/* <VercelToolbar /> */}
         </>
       )}
       </body>

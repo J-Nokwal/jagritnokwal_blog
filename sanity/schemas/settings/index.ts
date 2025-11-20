@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CogIcon } from '@sanity/icons'
-import * as demo from '@/sanity/lib/demo.data'
+import * as demo from '../../../sanity/lib/demo.data'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 import OpenGraphInput from './OpenGraphInput'

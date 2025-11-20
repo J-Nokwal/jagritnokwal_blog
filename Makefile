@@ -1,0 +1,2 @@
+deploy:
+	vc --prod
