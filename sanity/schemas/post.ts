@@ -1,6 +1,6 @@
 import { BookIcon, BulbOutlineIcon } from "@sanity/icons";
 import { format, parseISO } from "date-fns";
-import { defineArrayMember, defineField, defineType } from "sanity";
+import { ALL_FIELDS_GROUP, defineArrayMember, defineField, defineType } from "sanity";
 
 import authorType from "./author";
 import { portableTextHighlight, portableTextWithFonts } from "../plugins/portableTextComponents";
@@ -22,17 +22,34 @@ export default defineType({
   title: "Post",
   icon: BookIcon,
   type: "document",
+   groups: [
+    {
+      name: 'content',
+      title: 'Content',
+      default: true,
+    },
+    {
+      name: 'seo',
+      title: 'SEO',
+    },
+    {
+      ...ALL_FIELDS_GROUP,
+      hidden: true
+    }
+  ],
   fields: [
     defineField({
       name: "title",
       title: "Title",
       type: "string",
       validation: (rule) => rule.required(),
+      group: 'content',
     }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
+      group: 'content',
       options: {
         source: "title",
         maxLength: 96,
@@ -44,6 +61,7 @@ export default defineType({
       name: "content",
       title: "Content",
       type: "array",
+      group: 'content',
       of: [
         defineArrayMember({
           type: "block",
@@ -93,6 +111,7 @@ export default defineType({
       name: "excerpt",
       title: "Excerpt",
       type: "text",
+      group: 'content',
     }),
     defineField({
       name: "coverImage",
@@ -101,18 +120,27 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      group: 'content',
     }),
     defineField({
       name: "date",
       title: "Date",
       type: "datetime",
       initialValue: () => new Date().toISOString(),
+      group: 'content',
     }),
     defineField({
       name: "author",
       title: "Author",
       type: "reference",
       to: [{ type: authorType.name }],
+      group: 'content',
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO & Social Media',
+      type: 'seoFields',
+      group: 'seo', // Optional: group in a tab
     }),
   ],
   preview: {

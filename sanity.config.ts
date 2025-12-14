@@ -23,6 +23,7 @@ import { previewDocumentNode } from './sanity/plugins/previewPane'
 import { customDocumentActions } from './sanity/plugins/documentActions'
 import { dashboardTool } from '@sanity/dashboard'
 import { paneComponent } from './sanity/plugins/paneComponent'
+import seofields from 'sanity-plugin-seofields'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -49,6 +50,7 @@ export default defineConfig({
       resolve: {locations: locate},
       
     }),
+    seofields(),
     settingsPlugin({ type: settingsType.name }),
     unsplashImageAsset(),
     // Vision is for querying with GROQ from inside the Studio

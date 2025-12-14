@@ -60,11 +60,7 @@ export type Post = {
     }>;
     style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
     listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
+    markDefs?: null;
     level?: number;
     _type: "block";
     _key: string;
@@ -103,6 +99,33 @@ export type Post = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "author";
   };
+  seo?: SeoFields;
+};
+
+export type SeoFields = {
+  _type: "seoFields";
+  robots?: Robots;
+  title?: string;
+  description?: string;
+  metaImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  metaAttributes?: Array<{
+    _key: string;
+  } & MetaAttribute>;
+  keywords?: Array<string>;
+  canonicalUrl?: string;
+  openGraph?: OpenGraph;
+  twitter?: Twitter;
 };
 
 export type SanityImageCrop = {
@@ -147,6 +170,86 @@ export type Author = {
     alt?: string;
     _type: "image";
   };
+};
+
+export type Robots = {
+  _type: "robots";
+  noIndex?: boolean;
+  noFollow?: boolean;
+};
+
+export type MetaTag = {
+  _type: "metaTag";
+  metaAttributes?: Array<{
+    _key: string;
+  } & MetaAttribute>;
+};
+
+export type MetaAttribute = {
+  _type: "metaAttribute";
+  key?: string;
+  type?: "string" | "image";
+  value?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type Twitter = {
+  _type: "twitter";
+  card?: "summary" | "summary_large_image" | "app" | "player";
+  site?: string;
+  creator?: string;
+  title?: string;
+  description?: string;
+  imageType?: "upload" | "url";
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  imageUrl?: string;
+};
+
+export type OpenGraph = {
+  _type: "openGraph";
+  url?: string;
+  title?: string;
+  description?: string;
+  siteName?: string;
+  type?: "website" | "article" | "profile" | "book" | "music" | "video" | "product";
+  imageType?: "upload" | "url";
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  imageUrl?: string;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -245,7 +348,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Settings | Post | SanityImageCrop | SanityImageHotspot | Slug | Author | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Settings | Post | SeoFields | SanityImageCrop | SanityImageHotspot | Slug | Author | Robots | MetaTag | MetaAttribute | Twitter | OpenGraph | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/sanity.queries.ts
 // Variable: settingsQuery
@@ -330,11 +433,7 @@ export type PostAndMoreStoriesQueryResult = {
       }>;
       style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
       listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
+      markDefs?: null;
       level?: number;
       _type: "block";
       _key: string;
@@ -398,11 +497,7 @@ export type PostAndMoreStoriesQueryResult = {
       }>;
       style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
       listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
+      markDefs?: null;
       level?: number;
       _type: "block";
       _key: string;
